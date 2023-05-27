@@ -1,2 +1,38 @@
 # Leetcode-contest
 Will upload all the leetcode contest's code here.
+
+6395. Buy Two Chocolates
+
+java code->
+class Solution {
+    public int buyChoco(int[] prices, int money) {
+        Arrays.sort(prices);
+            int sum = prices[0]+prices[1];
+       int ans = money-sum;
+        if(ans>=0) return ans;
+        return money;
+    }
+}
+6394. Extra Characters in a String
+
+class Solution {
+    public int minExtraChar(String s, String[] dictionary) {
+        int n = s.length();
+        int[] dp = new int[n + 1]; 
+        Arrays.fill(dp, Integer.MAX_VALUE);
+        dp[0] = 0; 
+
+        for (int i = 1; i <= n; i++) {
+            for (String it : dictionary) {
+                int len = it.length();
+                if (i >= len && s.substring(i - len, i).equals(it)) {
+                    
+                    dp[i] = Math.min(dp[i], dp[i - len]);
+                }
+            }
+            dp[i] = Math.min(dp[i], dp[i - 1] + 1); 
+        }
+
+        return dp[n];
+    }
+}
